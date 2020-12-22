@@ -1,0 +1,46 @@
+import random
+
+list_of_words = ['python', 'java', 'kotlin', 'javascript']
+eng_lower_alphabet = 'abcdefghijklmnopqrstuvwxyz'
+count = 8
+list_of_letters = []
+print("H A N G M A N")
+start = input('Type "play" to play the game, "exit" to quit: ')
+if start == 'play':
+    print()
+    found_word = random.choice(list_of_words)
+    string = len(found_word) * "-"
+    print(string)
+    while True:
+        letter = input("Input a letter: ")
+        
+        if len(letter) != 1:
+            print("You should input a single letter")
+        elif letter not in eng_lower_alphabet:
+            print("Please enter a lowercase English letter")
+        else:
+            if letter not in found_word and letter not in list_of_letters:
+                print("That letter doesn't appear in the word")
+                count -= 1     
+            
+            if letter not in list_of_letters:
+                list_of_letters.append(letter)
+            else:
+                print("You've already guessed this letter")
+                
+            for i in range(len(found_word)):
+                if found_word[i] == letter:
+                    string = string[:i] + letter + string[i + 1:]
+                
+        if count == 0:
+            print('You lost!')
+            break
+        elif string == found_word:
+            print("You guessed the word " + string + "!")
+            print('You survived!')
+            break
+        
+        print()
+        print(string) 
+elif start == "exit":
+    pass
